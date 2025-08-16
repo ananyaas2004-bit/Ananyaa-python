@@ -1,0 +1,66 @@
+Pandas basic
+import pandas as pd
+data={'Name': ['Alice', 'Bob', 'Charlie'],
+        'Age': [25, 30, 22],
+        'City': ['New York', 'London', 'Paris']}
+df=pd.DataFrame(data)
+df.drop(['Age'],axis=1,inplace=True)
+df['University']=['SNU','UTK','KYZ']
+df
+
+Imputation strategies
+data=pd.read_csv('/content/sample_data/california_housing_train.csv')
+import seaborn as sns
+sns.distplot(data['longitude'])
+col=data['longitude']
+col=col.fillna(col.mean(),inplace=True)
+data.isnull().sum()
+
+Determining IQR
+import numpy as np
+list=[1,2,4,3,5,6,78,90]
+Q1=np.percentile(list,25)
+Q3=np.percentile(list,75)
+IQR= Q3-Q1
+upper=Q3+1.5*IQR
+lower=Q1-1.5*IQR
+upper,lower
+outliers=[]
+for i in list:
+  if((i>upper)or(i<lower)):
+    outliers.append(i)
+for i in list:
+  if i not in outliers:
+    print(i)
+
+Determining duplicate values
+import pandas as pd
+data={'Team':['A','A','A','B','B','B'],
+      'Points':[10,10,20,20,15,30]}
+d1=pd.DataFrame(data)
+d1[d1.duplicated()]
+  
+Matplotlib basic examples
+import pandas as pd
+import numpy as np
+import random
+import matplotlib.pyplot as plt
+pos=[1,3,4,5,6,7,10,12,13,15]
+runs=[23,46,64,72,81,90,96,100,102,105]
+plt.plot(pos,runs,color='g',marker='o',linestyle='--',markersize=8)
+plt.title("Position vs runs",color='r',fontsize=12)
+plt.xlabel('Position',color='r',fontsize=12)
+plt.ylabel('Runs',color='r',fontsize=12)
+plt.axis([0,17,0,110])
+
+Plotting bar charts using matplotlib
+Fields=['AI','ML','DS','DL','DJ']
+div_a=[12,34,23,36,28]
+div_b=[14,45,67,34,30]
+div_c=[16,18,35,56,70]
+index=np.arange(len(Fields))
+plt.bar(index,div_a,width=0.5,edgecolor='r',color='c',label='div_a')
+plt.bar(index+0.2,div_b,width=0.5,edgecolor='r',color='g',label='div_b')
+plt.bar(index+0.4,div_c,width=0.5,edgecolor='r',color='b',label='div_c')
+plt.xlabel('Fields',color='r',fontsize=12)
+plt.ylabel('Students',color='r',fontsize=12)
